@@ -1,0 +1,61 @@
+<div class="login-form-container">
+  <h1 class="login-form-title">Bejelentkezés</h1>
+  <div class="login-form-group">
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="login-form-element-group">
+        <input
+          class="login-form-input-element"
+          placeholder="Email cím"
+          type="text"
+          name="email"
+          formControlName="email"
+        />
+        <div
+          *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+        >
+          <p
+            class="login-form-error-message"
+            *ngIf="loginForm.get('email')?.errors?.['email']"
+          >
+            Az e-mail cím formátuma nem megfelelő.
+          </p>
+          <p
+            class="login-form-error-message"
+            *ngIf="loginForm.get('email')?.errors?.['required']"
+          >
+            Az e-mail cím megadása kötelező.
+          </p>
+        </div>
+      </div>
+      <div class="login-form-element-group">
+        <input
+          class="login-form-input-element"
+          placeholder="Jelszó"
+          type="password"
+          name="password"
+          formControlName="password"
+        />
+        <div
+          *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+        >
+          <p
+            class="login-form-error-message"
+            *ngIf="loginForm.get('password')?.errors?.['required']"
+          >
+            A jelszó megadása kötelező.
+          </p>
+        </div>
+      </div>
+      <p class="login-form-helper-message" *ngIf="invalidEmailOrPassword">
+        Hibás felhasználónév vagy jelszó!
+      </p>
+      <button
+        class="login-form-submit-button"
+        type="submit"
+        [disabled]="loginForm.invalid"
+      >
+        Bejelentkezés
+      </button>
+    </form>
+  </div>
+</div>
